@@ -9,9 +9,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Shooting")]
     public GameObject bulletPrefab;
-    public Transform firePoint;       // where bullets spawn
+    public Transform firePoint;
+    public Transform firePoint2;
     public float bulletSpeed = 15f;
-    public float fireRate = 0.15f;    // seconds between shots
+    public float fireRate = 0.15f;    
     private float nextFireTime;
     private bool isFiring;
     void Update()
@@ -26,13 +27,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position += move;
     }
 
-    // Called by Player Input "Move" Unity Event
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
-    // Called by Player Input "Shoot" Unity Event
+    
     public void OnShoot(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -48,6 +49,15 @@ public class PlayerMovement : MonoBehaviour
             nextFireTime = Time.time + fireRate;
             Shoot();
         }
+
+        if (isFiring)
+        {
+            moveSpeed = 3f;
+        }
+        else
+        {
+            moveSpeed = 7f;
+        }
     }
 
     void Shoot()
@@ -55,5 +65,11 @@ public class PlayerMovement : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = Vector2.up * bulletSpeed;
+
+        GameObject bullet2 = Instantiate(bulletPrefab, firePoint2.position, Quaternion.identity);
+        Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
+        rb2.linearVelocity = Vector2.up * bulletSpeed;
+
+
     }
 }
