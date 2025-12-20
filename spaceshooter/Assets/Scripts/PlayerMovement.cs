@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 10f;
     private Vector2 moveInput;
 
+  
+    public int maxHealth = 5;
+    public int currentHealth;
+
     [Header("Shooting")]
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -15,6 +19,11 @@ public class PlayerMovement : MonoBehaviour
     public float fireRate = 0.15f;    
     private float nextFireTime;
     private bool isFiring;
+
+    public void Start()
+    {
+        currentHealth = maxHealth;
+    }
     void Update()
     {
         MovePlayer();
@@ -58,6 +67,22 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = 7f;
         }
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        currentHealth -= dmg;
+
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+
+        Destroy(gameObject);
     }
 
     void Shoot()

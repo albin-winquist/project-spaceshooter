@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
     public float speed;
     public Vector2 direction;
-    
+
 
     void Update()
     {
@@ -13,9 +13,9 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Boss"))
         {
-            other.GetComponent<PlayerMovement>().TakeDamage(1);
+            other.GetComponent<BossController>().TakeDamage(2);
             gameObject.SetActive(false);
         }
     }
