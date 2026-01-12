@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            moveSpeed = 7f;
+            moveSpeed = 6f;
         }
     }
 
