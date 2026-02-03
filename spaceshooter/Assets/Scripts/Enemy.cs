@@ -18,9 +18,10 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            GameManager.instance.AddScore(scoreValue);
+            GameManager.Instance?.AddScore(scoreValue);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
+
 }

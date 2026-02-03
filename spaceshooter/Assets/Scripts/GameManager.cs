@@ -1,22 +1,28 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public Text scoreText;
+    public static GameManager Instance;
 
-    private int score;
+    public int Score { get; private set; }
 
-    void Awake()
+    public event Action<int> OnScoreChanged;
+    public event Action<int> OnScoreGained;
+
+    private void Awake()
     {
-        instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     public void AddScore(int amount)
     {
-        score += amount;
-        if (scoreText)
-            scoreText.text = "Score: " + score;
+        Score += amount;
+
+        OnScoreChanged?.Invoke(Score);
+        OnScoreGained?.Invoke(amount);
     }
 }

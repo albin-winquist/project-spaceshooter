@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6563926572002307091, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
+      propertyPath: scoreValue
+      value: 8690
+      objectReference: {fileID: 0}
     - target: {fileID: 9063579933657182783, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
       propertyPath: m_Size.x
       value: 1.8
@@ -152,10 +156,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1014736895960144, guid: c91342f6e3afc48fd958056404ead345, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9055218110396022481}
   m_SourcePrefab: {fileID: 100100000, guid: c91342f6e3afc48fd958056404ead345, type: 3}
 --- !u!4 &3585037428053482812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4799057029891002, guid: c91342f6e3afc48fd958056404ead345, type: 3}
   m_PrefabInstance: {fileID: 3589808967177313926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3589943783114210006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1014736895960144, guid: c91342f6e3afc48fd958056404ead345, type: 3}
+  m_PrefabInstance: {fileID: 3589808967177313926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9055218110396022481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589943783114210006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a709604cbe92e44bb9dee5ae13bbb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetRotator
+  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationDuration: 20
+  randomizeAxis: 1
+  randomizeSpeed: 1
+  speedRange: {x: 11.9, y: 21.5}
+  randomStartOffset: 1

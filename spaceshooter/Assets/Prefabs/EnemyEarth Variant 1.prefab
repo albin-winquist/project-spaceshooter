@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3309780774210415179
+--- !u!1001 &7622605617534552503
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1067396401062563452, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
       propertyPath: m_Name
-      value: EnemyEarth Variant
+      value: EnemyEarth Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 4503634844772854034, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.753935
+      value: 1.99181
       objectReference: {fileID: 0}
     - target: {fileID: 4503634844772854034, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.0622826
+      value: 2.16909
       objectReference: {fileID: 0}
     - target: {fileID: 4503634844772854034, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.567266
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4503634844772854034, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
       propertyPath: m_LocalRotation.w
@@ -52,27 +52,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6563926572002307091, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
+      propertyPath: scoreValue
+      value: 9810
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4586013017895325100, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4503634844772854034, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9087147405238664814}
+      addedObject: {fileID: 9011440994696731029}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
---- !u!4 &1400219346503680857 stripped
+--- !u!4 &6289504942131159205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4503634844772854034, guid: 7d291b92924d71349adf8c043382ae04, type: 3}
-  m_PrefabInstance: {fileID: 3309780774210415179}
+  m_PrefabInstance: {fileID: 7622605617534552503}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &9082765567578798736
+--- !u!1001 &9016046565721677163
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1400219346503680857}
+    m_TransformParent: {fileID: 6289504942131159205}
     m_Modifications:
     - target: {fileID: 1733945558841920, guid: 300f80108a63f48618cb4a1c8b8c1e86, type: 3}
       propertyPath: m_Name
@@ -141,10 +145,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1733945558841920, guid: 300f80108a63f48618cb4a1c8b8c1e86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1745947222613685480}
   m_SourcePrefab: {fileID: 100100000, guid: 300f80108a63f48618cb4a1c8b8c1e86, type: 3}
---- !u!4 &9087147405238664814 stripped
+--- !u!4 &9011440994696731029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4643521465287934, guid: 300f80108a63f48618cb4a1c8b8c1e86, type: 3}
-  m_PrefabInstance: {fileID: 9082765567578798736}
+  m_PrefabInstance: {fileID: 9016046565721677163}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9014314841768240939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1733945558841920, guid: 300f80108a63f48618cb4a1c8b8c1e86, type: 3}
+  m_PrefabInstance: {fileID: 9016046565721677163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1745947222613685480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9014314841768240939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a709604cbe92e44bb9dee5ae13bbb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetRotator
+  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationDuration: 20
+  randomizeAxis: 1
+  randomizeSpeed: 1
+  speedRange: {x: 7, y: 18}
+  randomStartOffset: 1

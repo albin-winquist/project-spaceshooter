@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class BossMovement : MonoBehaviour
 {
@@ -6,9 +7,44 @@ public class BossMovement : MonoBehaviour
     public Vector2 minBounds;
     public Vector2 maxBounds;
 
-    void Update()
+    [Header("Random Ease")]
+    [Range(0f, 1f)]
+    public float elasticChance = 0.35f; // % of moves that use Elastic
+
+    private bool movingRight = true;
+    private bool firstMove = true;
+
+    private void Start()
     {
-        float x = Mathf.PingPong(Time.time * speed, maxBounds.x - minBounds.x) + minBounds.x;
-        transform.position = new Vector2(x, transform.position.y);
+        Move();
+    }
+
+    void Move()
+    {
+        float targetX = movingRight ? maxBounds.x : minBounds.x;
+        float distance = Mathf.Abs(transform.position.x - targetX);
+        float duration = distance / speed;
+
+        Ease chosenEase;
+
+        if (firstMove)
+        {
+            chosenEase = Ease.InOutSine;
+            firstMove = false;
+        }
+        else
+        {
+            chosenEase = Random.value < elasticChance
+                ? Ease.InOutElastic
+                : Ease.InOutSine;
+        }
+
+        transform.DOMoveX(targetX, duration)
+            .SetEase(chosenEase)
+            .OnComplete(() =>
+            {
+                movingRight = !movingRight;
+                Move();
+            });
     }
 }
