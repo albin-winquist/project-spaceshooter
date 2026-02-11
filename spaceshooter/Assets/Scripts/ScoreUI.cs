@@ -16,7 +16,7 @@ public class ScoreUI : MonoBehaviour
         scoreText.text = " ";
 
         GameManager.Instance.OnScoreChanged += AnimateScore;
-        GameManager.Instance.OnScoreGained += PunchScore;
+       
     }
 
     void AnimateScore(int newScore)
@@ -35,21 +35,13 @@ public class ScoreUI : MonoBehaviour
         ).SetEase(Ease.OutCubic);
     }
 
-    void PunchScore(int amount)
-    {
-        scoreText.transform.DOPunchScale(
-            Vector3.one * 0.25f,
-            0.2f,
-            8,
-            1f
-        );
-    }
+    
 
     private void OnDestroy()
     {
         if (GameManager.Instance == null) return;
 
         GameManager.Instance.OnScoreChanged -= AnimateScore;
-        GameManager.Instance.OnScoreGained -= PunchScore;
+        
     }
 }
