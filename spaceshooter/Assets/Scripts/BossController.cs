@@ -56,7 +56,9 @@ public class BossController : MonoBehaviour
 
     void Die()
     {
-       
+        AudioManager.Instance.PlayExplosion(); 
         Destroy(gameObject);
+        CameraShake.Instance.Shake(0.8f, 0.8f);
+
     }
 }

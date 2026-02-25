@@ -95,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
         Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
         rb2.linearVelocity = Vector2.up * bulletSpeed;
 
+        AudioManager.Instance.PlayShoot();  
 
     }
 }
