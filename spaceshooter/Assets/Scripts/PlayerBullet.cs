@@ -1,10 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
     public float speed;
     public Vector2 direction;
 
+    public GameObject hitEffectPrefab;
 
     void Update()
     {
@@ -15,7 +16,14 @@ public class PlayerBullet : MonoBehaviour
     {
         if (other.CompareTag("Boss"))
         {
-            other.GetComponent<BossController>().TakeDamage(2);
+            BossController boss = other.GetComponent<BossController>();
+            boss.TakeDamage(2);
+
+            
+            Vector3 hitPos = other.ClosestPoint(transform.position);
+
+            Instantiate(hitEffectPrefab, hitPos, Quaternion.identity);
+
             gameObject.SetActive(false);
         }
     }

@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class BossController : MonoBehaviour
 {
@@ -11,9 +12,16 @@ public class BossController : MonoBehaviour
 
     private int phase = 1;
 
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+
     void Start()
     {
         currentHealth = maxHealth;
+
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // 👈 safer for bosses
+        originalColor = spriteRenderer.color;
+
         StartCoroutine(BossRoutine());
     }
 
@@ -42,6 +50,8 @@ public class BossController : MonoBehaviour
     {
         currentHealth -= damage;
 
+        PlayHitEffect(); // 👈 FLASH HERE
+
         if (currentHealth <= maxHealth * 0.66f)
             phase = 2;
 
@@ -54,11 +64,24 @@ public class BossController : MonoBehaviour
         }
     }
 
+    private void PlayHitEffect()
+    {
+        if (spriteRenderer == null) return;
+
+        spriteRenderer.DOKill(); // stop overlapping flashes
+
+        spriteRenderer.color = Color.white;
+
+        spriteRenderer
+            .DOColor(originalColor, 0.5f)
+            .SetEase(Ease.OutQuad);
+    }
+
     void Die()
     {
         AudioManager.Instance.PlayExplosion(); 
-        Destroy(gameObject);
         CameraShake.Instance.Shake(0.8f, 0.8f);
 
+        Destroy(gameObject);
     }
 }
