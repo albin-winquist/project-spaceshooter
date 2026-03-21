@@ -216,9 +216,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b694344aecfdcec489413543845f327a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossController
-  maxHealth: 1000
+  maxHealth: 2000
   currentHealth: 0
   damage: 1
   patternManager: {fileID: 840596528}
@@ -698,7 +698,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   m_FlipX: 0
@@ -1070,7 +1070,7 @@ MonoBehaviour:
   moveSpeed: 6
   maxHealth: 5
   currentHealth: 0
-  bulletPrefab: {fileID: 1194480124597296646, guid: 911848005ac203647af90c020d6bb9ed, type: 3}
+  bulletPrefab: {fileID: 1049909612633836519, guid: 6ec8be8cfa40633469e63a4ae4dd80a3, type: 3}
   firePoint: {fileID: 104317655}
   firePoint2: {fileID: 1019060528}
   bulletSpeed: 15
@@ -1582,7 +1582,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   m_FlipX: 0
