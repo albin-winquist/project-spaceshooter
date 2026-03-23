@@ -7,23 +7,27 @@ public class BossController : MonoBehaviour
     public int maxHealth = 1000;
     public int currentHealth;
     public int damage = 1;
+    public GameObject explosionEffectPrefab;
 
     public PatternManager patternManager;
 
     private int phase = 1;
+    private bool isDying = false;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
     void Start()
     {
+
         currentHealth = maxHealth;
 
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // 👈 safer for bosses
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
         originalColor = spriteRenderer.color;
 
         StartCoroutine(BossRoutine());
     }
+ 
 
     IEnumerator BossRoutine()
     {
@@ -50,7 +54,8 @@ public class BossController : MonoBehaviour
     {
         currentHealth -= damage;
 
-        PlayHitEffect(); // 👈 FLASH HERE
+        PlayHitEffect(); 
+
 
         if (currentHealth <= maxHealth * 0.66f)
             phase = 2;
@@ -58,17 +63,18 @@ public class BossController : MonoBehaviour
         if (currentHealth <= maxHealth * 0.33f)
             phase = 3;
 
-        if (currentHealth <= 0f)
+        if (currentHealth <= 0f && !isDying)
         {
-            Die();
+            StartCoroutine(FinalPhase());
         }
     }
 
     private void PlayHitEffect()
     {
+        AudioManager.Instance.PlayEnemyHit();
         if (spriteRenderer == null) return;
 
-        spriteRenderer.DOKill(); // stop overlapping flashes
+        spriteRenderer.DOKill(); 
 
         spriteRenderer.color = Color.white;
 
@@ -77,10 +83,51 @@ public class BossController : MonoBehaviour
             .SetEase(Ease.OutQuad);
     }
 
+    IEnumerator FinalPhase()
+    {
+
+
+        isDying = true;
+        patternManager.GetComponentInChildren<AimedShotPattern>().EnableFinalPhase();
+
+        spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(-1, LoopType.Yoyo);
+
+       
+        patternManager.SetFinalPhase(true);
+
+      
+        CameraShake.Instance?.Shake(1.5f, 0.5f);
+
+      
+        yield return new WaitForSeconds(5f);
+
+       
+        spriteRenderer.DOKill();
+        spriteRenderer.color = originalColor;
+
+     
+        Die();
+    }
+
     void Die()
     {
+        StopAllCoroutines();
+        patternManager.StopAllCoroutines();
         AudioManager.Instance.PlayExplosion(); 
-        CameraShake.Instance.Shake(0.8f, 0.8f);
+        CameraShake.Instance.Shake(5.5f, 1.1f);
+        StartCoroutine(WinSequence());
+
+       
+    }
+
+    IEnumerator WinSequence()
+    {
+                
+        yield return new WaitForSeconds(1.2f);
+        Instantiate(explosionEffectPrefab);
+        CameraShake.Instance.Shake(0.3f, 1.9f);
+        yield return new WaitForSeconds(0.5f);
+        MenuManager.Instance.OpenMenu();
 
         Destroy(gameObject);
     }

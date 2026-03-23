@@ -6,8 +6,8 @@ public class PatternManager : MonoBehaviour
     public SpiralPattern spiral;
     public RingBurstPattern ring;
     public AimedShotPattern aimed;
+    private bool isFinalPhase = false;
 
-    
 
     Coroutine currentPattern;
 
@@ -24,6 +24,12 @@ public class PatternManager : MonoBehaviour
     public void PlayPhase3()
     {
         SwitchPattern(aimed.Fire());
+    }
+
+    public void SetFinalPhase(bool value)
+    {
+       
+        isFinalPhase = value;
     }
 
     void SwitchPattern(IEnumerator newPattern)

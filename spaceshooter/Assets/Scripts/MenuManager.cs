@@ -20,7 +20,7 @@ public class MenuManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton + persist across scenes
+      
         if (Instance == null)
         {
             Instance = this;
@@ -34,7 +34,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        // Start OPEN only in Menu scene
+       
         if (SceneManager.GetActiveScene().name == "Menu")
             OpenMenuInstant();
         else
@@ -52,7 +52,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    // 🎬 OPEN (Animated)
+  
     public void OpenMenu()
     {
         currentTween?.Kill();
@@ -60,7 +60,7 @@ public class MenuManager : MonoBehaviour
         menuUI.SetActive(true);
         isOpen = true;
 
-        // Pause only if NOT in main menu
+      
         if (SceneManager.GetActiveScene().name != "Menu")
             Time.timeScale = 0f;
 
@@ -73,7 +73,7 @@ public class MenuManager : MonoBehaviour
             .Join(menuUI.transform.DOScale(0.5f, animDuration).SetEase(Ease.OutBack));
     }
 
-    // 🎬 CLOSE (Animated)
+   
     public void CloseMenu()
     {
         currentTween?.Kill();
@@ -91,7 +91,7 @@ public class MenuManager : MonoBehaviour
             });
     }
 
-    // ⚡ Instant open (used at scene start)
+   
     void OpenMenuInstant()
     {
         menuUI.SetActive(true);
@@ -101,7 +101,7 @@ public class MenuManager : MonoBehaviour
         isOpen = true;
     }
 
-    // ⚡ Instant close (used at scene start)
+   
     void CloseMenuInstant()
     {
         menuUI.SetActive(false);
@@ -115,5 +115,10 @@ public class MenuManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void QuitGame()
+    {       
+        Application.Quit();
     }
 }

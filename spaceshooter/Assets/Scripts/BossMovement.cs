@@ -9,7 +9,7 @@ public class BossMovement : MonoBehaviour
 
     [Header("Random Ease")]
     [Range(0f, 1f)]
-    public float elasticChance = 0.35f; // % of moves that use Elastic
+    public float elasticChance = 0.35f;
 
     private bool movingRight = true;
     private bool firstMove = true;

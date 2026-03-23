@@ -16,9 +16,10 @@ public class PLayerBullet2 : MonoBehaviour
     {
         if (other.CompareTag("Boss"))
         {
-            BossController boss = other.GetComponent<BossController>();
-            boss.TakeDamage(2);
+           
 
+            BossMovementNoVFX boss2 = other.GetComponent<BossMovementNoVFX>();
+            boss2.TakeDamage(2);
 
             Vector3 hitPos = other.ClosestPoint(transform.position);
 

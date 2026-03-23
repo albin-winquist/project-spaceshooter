@@ -12,6 +12,13 @@ public class AimedShotPattern : MonoBehaviour
     private float baseRotation = 0f;
     private float rotationSpeed = 20f;
 
+    private bool finalPhase = false;
+
+    public void EnableFinalPhase()
+    {
+        finalPhase = true;
+    }
+
     public IEnumerator Fire()
     {
         yield return new WaitForSeconds(1f);
@@ -45,10 +52,21 @@ public class AimedShotPattern : MonoBehaviour
                 cb.curveFrequency = Random.Range(3f, 6f);
             }
 
+            // rotation behaviour
             baseRotation += rotationSpeed * Time.deltaTime;
-            rotationSpeed += 0.5f; // ramps difficulty 🔥
 
-            yield return new WaitForSeconds(fireDelay);
+            if (finalPhase)
+            {
+                rotationSpeed += 1.5f;      // spins much faster
+            }
+            else
+            {
+                rotationSpeed += 0.5f;    // normal ramp
+            }
+
+            float delay = finalPhase ? fireDelay * 0.85f : fireDelay;
+
+            yield return new WaitForSeconds(delay);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
   
     public int maxHealth = 5;
     public int currentHealth;
+
+    [Header("Hitbox")]
+    public GameObject hitboxVisual;
 
     [Header("Shooting")]
     public GameObject bulletPrefab;
@@ -62,15 +67,18 @@ public class PlayerMovement : MonoBehaviour
         if (isFiring)
         {
             moveSpeed = 3f;
+            hitboxVisual.SetActive(true);
         }
         else
         {
             moveSpeed = 6f;
+            hitboxVisual.SetActive(false);
         }
     }
 
     public void TakeDamage(int dmg)
     {
+        AudioManager.Instance.PlayPlayerHit();
         currentHealth -= dmg;
 
         if (currentHealth <= 0f)
@@ -81,6 +89,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Die()
     {
+        AudioManager.Instance.PlayExplosion();
+        CameraShake.Instance.Shake(0.4f, 0.4f);
+        StartCoroutine(WinSequence());
+
+
+    }
+
+    IEnumerator WinSequence()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        MenuManager.Instance.OpenMenu();
 
         Destroy(gameObject);
     }
