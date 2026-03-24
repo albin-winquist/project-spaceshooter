@@ -2223,7 +2223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RingBurstPattern
   bulletPrefab: {fileID: 3233436239057824794, guid: ca6ba2f597b0d8f40989e3705d98b781, type: 3}
   bulletCount: 28
-  burstDelay: 1.2
+  burstDelay: 0.9
 --- !u!1001 &826010524
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -72,7 +72,7 @@ public class BossMovementNoVFX : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        MenuManager.Instance.OpenMenu();
+        MenuManager.Instance?.OpenMenu();
 
         Destroy(gameObject);
     }

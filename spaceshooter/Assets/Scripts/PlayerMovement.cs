@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Hitbox")]
     public GameObject hitboxVisual;
 
+    [Header("Debug")]
+    public bool godMode = false;
+
     [Header("Shooting")]
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         HandleShooting();
+        HandleDebugKeys();
     }
 
     void MovePlayer()
@@ -41,7 +45,15 @@ public class PlayerMovement : MonoBehaviour
         transform.position += move;
     }
 
-    
+    void HandleDebugKeys()
+    {
+        if (Keyboard.current.bKey.wasPressedThisFrame)
+        {
+            godMode = !godMode;
+            Debug.Log("God Mode: " + godMode);
+        }
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -78,7 +90,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
-        AudioManager.Instance.PlayPlayerHit();
+      
+        AudioManager.Instance?.PlayPlayerHit();
+
+        if (godMode) return;
+
         currentHealth -= dmg;
 
         if (currentHealth <= 0f)
@@ -89,18 +105,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Die()
     {
-        AudioManager.Instance.PlayExplosion();
-        CameraShake.Instance.Shake(0.4f, 0.4f);
+        AudioManager.Instance?.PlayExplosion();
+        CameraShake.Instance?.Shake(0.4f, 0.4f);
         StartCoroutine(WinSequence());
-
-
     }
 
     IEnumerator WinSequence()
     {
         yield return new WaitForSeconds(0.3f);
 
-        MenuManager.Instance.OpenMenu();
+        MenuManager.Instance?.OpenMenu();
 
         Destroy(gameObject);
     }
@@ -115,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
         rb2.linearVelocity = Vector2.up * bulletSpeed;
 
-        AudioManager.Instance.PlayShoot();  
+        AudioManager.Instance?.PlayShoot();
 
     }
 }

@@ -124,7 +124,7 @@ public class BossController : MonoBehaviour
     {
                 
         yield return new WaitForSeconds(1.2f);
-        Instantiate(explosionEffectPrefab);
+        Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
         CameraShake.Instance.Shake(0.3f, 1.9f);
         yield return new WaitForSeconds(0.5f);
         MenuManager.Instance.OpenMenu();

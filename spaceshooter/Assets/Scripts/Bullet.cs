@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
         {
             other.GetComponent<PlayerMovement>().TakeDamage(1);
             gameObject.SetActive(false);
-            CameraShake.Instance.Shake(0.2f, 0.3f);
+            CameraShake.Instance?.Shake(0.2f, 0.3f);
         }
     }
 
